@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Quiz</title>
+    <link rel="stylesheet" href="styles.css" />
+</head>
+
+<body>
+    <div class="quiz-container">
+        <h1>Quiz</h1>
+        <div id="quiz">
+            <h2 id="question"></h2>
+            <div id="choices">
+                <button id="a" class="option"></button>
+                <button id="b" class="option"></button>
+                <button id="c" class="option"></button>
+                <button id="d" class="option"></button>
+            </div>
+            <button id="next" style="display: none;">Next Question</button>
+        </div>
+        <div id="results" style="display:none;">
+            <h2>Quiz Complete!</h2>
+            <p>Your score: <span id="score"></span></p>
+            <h3>High Scores:</h3>
+            <ol id="highScores"></ol>
+            <button id="restart">Restart Quiz</button>
+        </div>
+    </div>
+
+    <script src="scripts.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,78 @@
+<!-- 1. API Integration
+Integrate with the provided API to fetch product data.
+API URL: https://fakestoreapi.com/products
+Handle API requests and responses appropriately.
+Implement error handling for API calls.
+2. Product Listing
+Display a list of products fetched from the API.
+Each product should show at minimum:
+Product name
+Price
+Image
+Add to Cart button
+3. Shopping Cart Functionality
+Implement “Add to Cart” functionality for each product.
+Create a cart section that displays added items.
+Allow users to remove items from the cart.
+Update cart total when items are added or removed.
+4. Responsive Design
+Ensure the website is fully responsive and works well on mobile, tablet, and desktop views.
+Use CSS media queries to adjust layouts for different screen sizes.
+5. Optional: Product Detail Page
+If time allows, create a product detail page that shows more information about a selected product.
+Implement navigation between the product list and detail pages. -->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shopping Cart</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+</head>
+
+<body>
+    <header>
+        <h1>Shopping</h1>
+        <button class="cart-btn">
+            <i class="fas fa-shopping-cart"></i> Cart
+            <span class="cart-count">[0]</span>
+        </button>
+    </header>
+
+    <main>
+        <!-- Products Section -->
+        <section class="products">
+            <h2>Our Products</h2>
+            <div class="product-list">
+                <!-- <div class="pricewithprice"></div> -->
+            </div>
+        </section>
+
+
+        <section class="cart">
+            <div class="cart-header">
+                <h2>Your Cart</h2>
+                <button class="close-cart">Close</button>
+                <button class="clear-cart">Clear Cart</button>
+            </div>
+            <div class="cart-items"></div>
+
+            <div class="cart-total">
+                Total: $<span>0.00</span>
+                <button class="PayBtn">Click To Pay</button>
+            </div>
+        </section>
+    </main>
+    <footer class="footer">
+        Created by <a href="https://my-portfolio-wine-one-81.vercel.app/">Me</a>
+        <p>© 2024 Thakur</p>
+    </footer>
+    <script src="script.js"></script>
+</body>
+
+
+
+</html>
