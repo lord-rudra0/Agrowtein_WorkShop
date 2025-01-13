@@ -20,6 +20,7 @@ fetch(url)
   })
   .then(data => {
     displayProducts(data);
+    setupProductClick(data);
     setupCartButtons(data);
   })
   .catch(error => {
@@ -28,33 +29,106 @@ fetch(url)
   });
 
 // Display Products
+
 function displayProducts(products) {
-  const productHTML = products.map(product => `
-    <div class="product">
-      <div class="img-container">
-        <img src="${product.image}" alt="${product.title}" class="product-img">
+  const productHTML = products
+    .map(
+      (product) => `
+      <div class="product" data-id="${product.id}">
+        <div class="img-container">
+          <img src="${product.image}" alt="${product.title}" class="product-img">
+        </div>
+        <h3>${product.title}</h3>
+        <h4>$${product.price}</h4>
+        <button class="bag-btn" data-id="${product.id}">Add to Cart</button>
       </div>
-      <h3>${product.title}</h3>
-      <h4>$${product.price}</h4>
-      <button class="bag-btn" data-id="${product.id}">Add to Cart</button>
-    </div>
-  `).join('');
+    `
+    )
+    .join('');
   productList.innerHTML = productHTML;
 }
+
+// Set up product box click
+function setupProductClick(products) {
+  const productElements = document.querySelectorAll('.product');
+  productElements.forEach((productElement) => {
+    productElement.addEventListener('click', (event) => {
+      const id = productElement.dataset.id;
+      const product = products.find((item) => item.id === parseInt(id));
+      if (product && !event.target.classList.contains('bag-btn')) {
+        displayDescription(product);
+      }
+    });
+  });
+}
+
+//Product Description
+function displayDescription(product) {
+  mainContent.innerHTML = `
+    <div class="product-description" id="product-description">
+      <img src="${product.image}" alt="${product.title}" class="product-img">
+      <h2>${product.title}</h2>
+      <p>${product.description}</p>
+      <h3>Price: $${product.price}</h3>
+      <button class="back-btn" id="back-btn">← Back to Products</button>
+    </div>
+  `;
+  
+  const backToListButton = document.querySelector('#back-btn');
+  // const productDetailSection = document.querySelector('#product-description');
+
+    backToListButton.addEventListener('click', () => {
+      // productDetailSection.style.display = 'none'; 
+      // productList.style.display = 'block'; 
+      // mainContent.innerHTML = '';
+      // displayProducts();
+      window.location.reload();
+    });
+}
+
 
 // Cart Buttons
 function setupCartButtons(products) {
   const buttons = [...document.querySelectorAll('.bag-btn')];
-  buttons.forEach(button => {
+  buttons.forEach((button) => {
     const id = button.dataset.id;
-    button.addEventListener('click', () => {
-      const product = products.find(item => item.id === parseInt(id));
+    button.addEventListener('click', (event) => {
+      event.stopPropagation();
+      const product = products.find((item) => item.id === parseInt(id));
       addToCart(product);
       button.textContent = 'In Cart';
       button.disabled = true;
     });
   });
 }
+
+// function displayProducts(products) {
+//   const productHTML = products.map(product => `
+//     <div class="product">
+//       <div class="img-container">
+//         <img src="${product.image}" alt="${product.title}" class="product-img">
+//       </div>
+//       <h3>${product.title}</h3>
+//       <h4>$${product.price}</h4>
+//       <button class="bag-btn" data-id="${product.id}">Add to Cart</button>
+//     </div>
+//   `).join('');
+//   productList.innerHTML = productHTML;
+// }
+
+// Cart Buttons
+// function setupCartButtons(products) {
+//   const buttons = [...document.querySelectorAll('.bag-btn')];
+//   buttons.forEach(button => {
+//     const id = button.dataset.id;
+//     button.addEventListener('click', () => {
+//       const product = products.find(item => item.id === parseInt(id));
+//       addToCart(product);
+//       button.textContent = 'In Cart';
+//       button.disabled = true;
+//     });
+//   });
+// }
 
 // Add Product
 function addToCart(product) {
@@ -130,5 +204,20 @@ cartBtn.addEventListener('click', () => {
 
   //local storage
 
+  window.addEventListener('DOMContentLoaded', () => {
+    const storageCart = JSON.parse(localStorage.getItem('cart'));
+    if (storageCart) {
+      cartList = storageCart;
+      updateCartUI();
+    }
+  }
+  );
 
-  
+  window.addEventListener('beforeunload', () => {
+    localStorage.setItem('cart', JSON.stringify(cartList));
+  }
+  );
+
+
+
+  //when i click on any place of box it fetch the description of product 
