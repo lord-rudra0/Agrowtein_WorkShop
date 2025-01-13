@@ -102,33 +102,6 @@ function setupCartButtons(products) {
   });
 }
 
-// function displayProducts(products) {
-//   const productHTML = products.map(product => `
-//     <div class="product">
-//       <div class="img-container">
-//         <img src="${product.image}" alt="${product.title}" class="product-img">
-//       </div>
-//       <h3>${product.title}</h3>
-//       <h4>$${product.price}</h4>
-//       <button class="bag-btn" data-id="${product.id}">Add to Cart</button>
-//     </div>
-//   `).join('');
-//   productList.innerHTML = productHTML;
-// }
-
-// Cart Buttons
-// function setupCartButtons(products) {
-//   const buttons = [...document.querySelectorAll('.bag-btn')];
-//   buttons.forEach(button => {
-//     const id = button.dataset.id;
-//     button.addEventListener('click', () => {
-//       const product = products.find(item => item.id === parseInt(id));
-//       addToCart(product);
-//       button.textContent = 'In Cart';
-//       button.disabled = true;
-//     });
-//   });
-// }
 
 // Add Product
 function addToCart(product) {
