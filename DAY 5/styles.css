@@ -147,7 +147,7 @@ main {
     }
 
     header input {
-        margin: 9px;
+        width: 7rem;
     }
 
     .img-container {
