@@ -19,6 +19,7 @@ fetch(url)
     return response.json();
   })
   .then(data => {
+    products = data;
     displayProducts(data);
     setupProductClick(data);
     setupCartButtons(data);
@@ -191,6 +192,14 @@ cartBtn.addEventListener('click', () => {
   }
   );
 
+  //search 
+  const search = document.querySelector('.search');
+  search.addEventListener('keyup', () => {
+    const searchValue = search.value.toLowerCase();
+    const filteredProducts = products.filter(product => product.title.toLowerCase().includes(searchValue));
+    displayProducts(filteredProducts);
+    setupProductClick(filteredProducts);
+    setupCartButtons(filteredProducts);
+  });
 
 
-  //when i click on any place of box it fetch the description of product 
